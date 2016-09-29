@@ -1,4 +1,19 @@
 *.class
+*.idea
+*.iml
+.classpath
+.project
+.springBeans
+.settings
+.settings/*
+target/*
+/*/.settings/*
+/*/target/*
+/*/build/*
+/*/.metadata/*
+/*/.gitignore
+*.log
+*.log.*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
