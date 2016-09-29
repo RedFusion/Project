@@ -1,0 +1,14 @@
+<schema-set xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            prefer-inline="true" type-substitutions="xs:base64Binary xs:string" >
+
+    <schema-type
+            type-name="dateTime" java-class="org.joda.time.DateTime"
+            serializer="org.jibx.runtime.JodaConvert.serializeZonedDateTime"
+            deserializer="org.jibx.runtime.JodaConvert.deserializeZonedDateTime" />
+
+    <schema-type type-name="date" format-name="LocalDate.default" />
+    <schema-type type-name="time" format-name="LocalTime.local" />
+
+    <schema-set package="ru.menkin.xml.data" names="CommonInfo.xsd ReportInfo.xsd" show-schema="false"
+                prefer-inline="true" any-handling="mapped" />
+</schema-set>

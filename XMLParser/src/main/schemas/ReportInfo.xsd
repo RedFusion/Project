@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.eos.ru/2010/sev" elementFormDefault="qualified" targetNamespace="http://www.eos.ru/2010/sev"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="CommonInfo.xsd" />
+    <xs:element name="Report" nillable="true" type="tns:Report" />
+    <xs:complexType name="Report">
+        <xs:sequence>
+            <xs:element name="Header" type="tns:MessageHeader" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,38 @@
+<xs:schema xmlns:tns="http://www.eos.ru/2010/sev" elementFormDefault="qualified"
+           targetNamespace="http://www.eos.ru/2010/sev"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="MessageHeader">
+        <xs:sequence>
+            <xs:element name="Sender" type="tns:Sender"/>
+        </xs:sequence>
+        <xs:attribute name="MessageID" type="xs:string"/>
+        <xs:attribute name="Version" type="xs:string"/>
+        <xs:attribute name="TimeZone" type="xs:int"/>
+        <xs:attribute name="Time" type="xs:dateTime"/>
+        <xs:attribute name="ReturnID" type="xs:string"/>
+        <xs:attribute name="ResourceID" type="xs:int"/>
+    </xs:complexType>
+    <xs:complexType name="Sender">
+        <xs:sequence>
+            <xs:element name="Contact" type="tns:Contact"/>
+            <xs:element name="EDMS" type="tns:EDMS"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Contact">
+        <xs:sequence>
+            <xs:element name="Organization" type="tns:Organization"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EDMS">
+        <xs:attribute name="UID" type="xs:string"/>
+        <xs:attribute name="Version" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="Organization">
+        <xs:sequence>
+            <xs:element name="UID" type="xs:string"/>
+            <xs:element name="ShortName" type="xs:string"/>
+            <xs:element minOccurs="0" name="FullName" type="xs:string" nillable="false"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

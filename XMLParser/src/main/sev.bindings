@@ -1,0 +1,263 @@
+<binding xmlns:tns="http://www.eos.ru/2010/sev" name="sev" package="ru.acs.cb.schemas.sev" trim-whitespace="true">
+  <namespace uri="http://www.eos.ru/2010/sev" default="elements" prefix="tns"/>
+  <mapping abstract="true" type-name="tns:MessageHeader" class="ru.acs.cb.schemas.sev.MessageHeader">
+    <structure map-as="tns:Sender" get-method="getSender" set-method="setSender" name="Sender"/>
+    <value style="attribute" name="MessageID" get-method="getMessageID" set-method="setMessageID"/>
+    <value style="attribute" name="Version" get-method="getVersion" set-method="setVersion"/>
+    <value style="attribute" name="TimeZone" get-method="getTimeZone" set-method="setTimeZone" usage="optional"/>
+    <value style="attribute" name="Time" get-method="getTime" set-method="setTime" serializer="org.jibx.runtime.JodaConvert.serializeZonedDateTime" deserializer="org.jibx.runtime.JodaConvert.deserializeZonedDateTime"/>
+    <value style="attribute" name="MessageType" get-method="getMessageType" set-method="setMessageType" format="tns:DocumentMessageType"/>
+    <value style="attribute" name="ReturnID" get-method="getReturnID" set-method="setReturnID"/>
+    <value style="attribute" name="ResourceID" get-method="getResourceID" set-method="setResourceID"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Sender" class="ru.acs.cb.schemas.sev.Sender">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <structure map-as="tns:EDMS" get-method="getEDMS" set-method="setEDMS" name="EDMS"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Contact" class="ru.acs.cb.schemas.sev.Contact">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Organization" get-method="getOrganization" set-method="setOrganization" name="Organization"/>
+    <structure map-as="tns:Department" get-method="getDepartment" set-method="setDepartment" usage="optional" name="Department"/>
+    <structure map-as="tns:OfficialPerson" get-method="getOfficialPerson" set-method="setOfficialPerson" usage="optional" name="OfficialPerson"/>
+    <collection get-method="getAddressList" set-method="setAddressList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Address" name="Address"/>
+    </collection>
+    <collection get-method="getEcontactList" set-method="setEcontactList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Econtact" name="Econtact"/>
+    </collection>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Organization" class="ru.acs.cb.schemas.sev.Organization">
+    <structure map-as="tns:UidOptional"/>
+    <value style="element" name="ShortName" get-method="getShortName" set-method="setShortName"/>
+    <value style="element" name="FullName" get-method="getFullName" set-method="setFullName" usage="optional"/>
+    <value style="element" name="INN" get-method="getINN" set-method="setINN" usage="optional"/>
+    <value style="element" name="OKPO" get-method="getOKPO" set-method="setOKPO" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:BaseComplexType" class="ru.acs.cb.schemas.sev.BaseComplexType"/>
+  <mapping abstract="true" type-name="tns:UidRequired" class="ru.acs.cb.schemas.sev.UidRequired">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="attribute" name="UID" get-method="getUID" set-method="setUID"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:UidOptional" class="ru.acs.cb.schemas.sev.UidOptional">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="attribute" name="UID" get-method="getUID" set-method="setUID" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:SimpleContentUidRequired" class="ru.acs.cb.schemas.sev.SimpleContentUidRequired">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <value style="attribute" name="UID" get-method="getUID" set-method="setUID"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:SimpleContentUidOptional" class="ru.acs.cb.schemas.sev.SimpleContentUidOptional">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <value style="attribute" name="UID" get-method="getUID" set-method="setUID" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Executor" class="ru.acs.cb.schemas.sev.Executor">
+    <structure map-as="tns:UidOptional"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <value style="element" name="Text" get-method="getText" set-method="setText" usage="optional"/>
+    <value style="element" name="Date" get-method="getDate" set-method="setDate" usage="optional" serializer="org.jibx.runtime.JodaConvert.serializeZonedDateTime" deserializer="org.jibx.runtime.JodaConvert.deserializeZonedDateTime"/>
+    <structure map-as="tns:SimpleContentUidOptional" get-method="getStatus" set-method="setStatus" usage="optional" name="Status"/>
+    <collection get-method="getFileList" set-method="setFileList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:DeloFile" name="File"/>
+    </collection>
+    <value style="attribute" name="Responsible" get-method="isResponsible" set-method="setResponsible"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:DeloFile" class="ru.acs.cb.schemas.sev.DeloFile">
+    <structure map-as="tns:UidRequired"/>
+    <value style="element" name="Description" get-method="getDescription" set-method="setDescription"/>
+    <value style="element" name="Extension" get-method="getExtension" set-method="setExtension"/>
+    <collection get-method="getEDSList" set-method="setEDSList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:EDS" name="EDS"/>
+    </collection>
+    <value style="attribute" name="ResourceID" get-method="getResourceID" set-method="setResourceID"/>
+    <value style="attribute" name="Size" get-method="getSize" set-method="setSize"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:EDS" class="ru.acs.cb.schemas.sev.EDS">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <value style="attribute" name="ResourceID" get-method="getResourceID" set-method="setResourceID"/>
+    <value style="attribute" name="Date" get-method="getDate" set-method="setDate" usage="optional" serializer="org.jibx.runtime.JodaConvert.serializeZonedDateTime" deserializer="org.jibx.runtime.JodaConvert.deserializeZonedDateTime"/>
+    <value style="attribute" name="KindID" get-method="getKindID" set-method="setKindID" usage="optional"/>
+    <value style="attribute" name="Certificate" get-method="getCertificate" set-method="setCertificate" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Task" class="ru.acs.cb.schemas.sev.Task">
+    <structure map-as="tns:UidRequired"/>
+    <value style="element" name="Number" get-method="getNumber" set-method="setNumber" usage="optional"/>
+    <structure map-as="tns:ResolutionAuthor" get-method="getAuthor" set-method="setAuthor" usage="optional" name="Author"/>
+    <value style="element" name="Text" get-method="getText" set-method="setText" usage="optional"/>
+    <collection get-method="getFileList" set-method="setFileList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:DeloFile" name="File"/>
+    </collection>
+    <collection get-method="getExecutorList" set-method="setExecutorList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Executor" name="Executor"/>
+    </collection>
+    <structure map-as="tns:Control" get-method="getControl" set-method="setControl" usage="optional" name="Control"/>
+    <value style="element" name="Note" get-method="getNote" set-method="setNote" usage="optional"/>
+    <structure map-as="tns:SimpleContentUidOptional" get-method="getCategory" set-method="setCategory" usage="optional" name="Category"/>
+    <structure map-as="tns:Parent" get-method="getParent" set-method="setParent" usage="optional" name="Parent"/>
+    <value style="element" name="IsProject" get-method="isIsProject" set-method="setIsProject"/>
+    <value style="attribute" name="TaskID" get-method="getTaskID" set-method="setTaskID"/>
+    <value style="attribute" name="Type" get-method="getType" set-method="setType" format="tns:TaskType"/>
+    <value style="attribute" name="Privacy" get-method="isPrivacy" set-method="setPrivacy"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:ResolutionAuthor" class="ru.acs.cb.schemas.sev.ResolutionAuthor">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <value style="element" name="SignDate" get-method="getSignDate" set-method="setSignDate" format="LocalDate.default"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:DocumentControl" class="ru.acs.cb.schemas.sev.DocumentControl">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="element" name="Deadline" get-method="getDeadline" set-method="setDeadline" usage="optional" format="LocalDate.default"/>
+    <value style="element" name="FactDate" get-method="getFactDate" set-method="setFactDate" usage="optional" format="LocalDate.default"/>
+    <value style="attribute" name="State" get-method="getState" set-method="setState" format="tns:ControlState"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Control" class="ru.acs.cb.schemas.sev.Control">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" usage="optional" name="Contact"/>
+    <value style="element" name="Deadline" get-method="getDeadline" set-method="setDeadline" usage="optional" format="LocalDate.default"/>
+    <value style="element" name="Summary" get-method="getSummary" set-method="setSummary" usage="optional"/>
+    <value style="element" name="FactDate" get-method="getFactDate" set-method="setFactDate" usage="optional" format="LocalDate.default"/>
+    <value style="element" name="Resume" get-method="getResume" set-method="setResume" usage="optional"/>
+    <value style="attribute" name="State" get-method="getState" set-method="setState" format="tns:ControlState"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Parent" class="ru.acs.cb.schemas.sev.Parent">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="attribute" name="DocumentID" get-method="getDocumentID" set-method="setDocumentID" usage="optional"/>
+    <value style="attribute" name="TaskID" get-method="getTaskID" set-method="setTaskID" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:PrivatePerson" class="ru.acs.cb.schemas.sev.PrivatePerson">
+    <structure map-as="tns:UidOptional"/>
+    <value style="element" name="FIO" get-method="getFIO" set-method="setFIO"/>
+    <value style="element" name="Sex" get-method="getSex" set-method="setSex" usage="optional" format="tns:Sex"/>
+    <value style="element" name="INN" get-method="getINN" set-method="setINN" usage="optional"/>
+    <structure map-as="tns:Passport" get-method="getPassport" set-method="setPassport" usage="optional" name="Passport"/>
+    <collection get-method="getAddressList" set-method="setAddressList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Address" name="Address"/>
+    </collection>
+    <collection get-method="getEcontactList" set-method="setEcontactList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Econtact" name="Econtact"/>
+    </collection>
+    <value style="element" name="SNILS" get-method="getSNILS" set-method="setSNILS" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Passport" class="ru.acs.cb.schemas.sev.Passport">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="element" name="Series" get-method="getSeries" set-method="setSeries"/>
+    <value style="element" name="Number" get-method="getNumber" set-method="setNumber"/>
+    <value style="element" name="GivenBy" get-method="getGivenBy" set-method="setGivenBy" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Address" class="ru.acs.cb.schemas.sev.Address">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="element" name="ZipCode" get-method="getZipCode" set-method="setZipCode" usage="optional"/>
+    <structure map-as="tns:SimpleContentUidOptional" get-method="getRegion" set-method="setRegion" usage="optional" name="Region"/>
+    <value style="element" name="Settlement" get-method="getSettlement" set-method="setSettlement" usage="optional"/>
+    <value style="element" name="Text" get-method="getText" set-method="setText" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Econtact" class="ru.acs.cb.schemas.sev.Econtact">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <value style="attribute" name="Type" get-method="getType" set-method="setType" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Document" class="ru.acs.cb.schemas.sev.Document">
+    <structure map-as="tns:UidOptional"/>
+    <structure map-as="tns:RegistrationInfo" get-method="getRegistrationInfo" set-method="setRegistrationInfo" name="RegistrationInfo"/>
+    <structure map-as="tns:DocumentControl" get-method="getControl" set-method="setControl" usage="optional" name="Control"/>
+    <structure map-as="tns:SimpleContentUidOptional" get-method="getGroup" set-method="setGroup" usage="optional" name="Group"/>
+    <structure map-as="tns:SimpleContentUidOptional" get-method="getAccess" set-method="setAccess" usage="optional" name="Access"/>
+    <value style="element" name="Consists" get-method="getConsists" set-method="setConsists" usage="optional"/>
+    <value style="element" name="Annotation" get-method="getAnnotation" set-method="setAnnotation" usage="optional"/>
+    <value style="element" name="Note" get-method="getNote" set-method="setNote" usage="optional"/>
+    <value style="element" name="Collective" get-method="getCollective" set-method="setCollective" usage="optional"/>
+    <collection get-method="getRubricList" set-method="setRubricList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:SimpleContentUidOptional" name="Rubric"/>
+    </collection>
+    <collection get-method="getFileList" set-method="setFileList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:DeloFile" name="File"/>
+    </collection>
+    <collection get-method="getAuthorList" set-method="setAuthorList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:DocumentAuthor" name="Author"/>
+    </collection>
+    <collection get-method="getVisaList" set-method="setVisaList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Visa" name="Visa"/>
+    </collection>
+    <collection get-method="getApprovalList" set-method="setApprovalList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Approval" name="Approval"/>
+    </collection>
+    <collection get-method="getAddresseeList" set-method="setAddresseeList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Addressee" name="Addressee"/>
+    </collection>
+    <collection get-method="getWriterList" set-method="setWriterList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Writer" name="Writer"/>
+    </collection>
+    <collection get-method="getAdditionalFieldList" set-method="setAdditionalFieldList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:AdditionalField" name="AdditionalField"/>
+    </collection>
+    <collection get-method="getLinkList" set-method="setLinkList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:Link" name="Link"/>
+    </collection>
+    <value style="attribute" name="DocumentID" get-method="getDocumentID" set-method="setDocumentID"/>
+    <value style="attribute" name="Type" get-method="getType" set-method="setType" format="tns:DocumentType"/>
+    <value style="attribute" name="MainDocument" get-method="isMainDocument" set-method="setMainDocument"/>
+    <value style="attribute" name="Status" get-method="getStatus" set-method="setStatus" usage="optional" format="tns:Status"/>
+    <value style="attribute" name="Version" get-method="getVersion" set-method="setVersion" usage="optional"/>
+    <value style="attribute" name="VersionUID" get-method="getVersionUID" set-method="setVersionUID" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:RegistrationInfo" class="ru.acs.cb.schemas.sev.RegistrationInfo">
+    <structure map-as="tns:BaseComplexType"/>
+    <value style="element" name="Number" get-method="getNumber" set-method="setNumber"/>
+    <value style="element" name="Date" get-method="getDate" set-method="setDate" format="LocalDate.default"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:DocumentAuthor" class="ru.acs.cb.schemas.sev.DocumentAuthor">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" usage="optional" name="Contact"/>
+    <structure map-as="tns:RegistrationInfo" get-method="getRegistrationInfo" set-method="setRegistrationInfo" usage="optional" name="RegistrationInfo"/>
+    <structure map-as="tns:PrivatePerson" get-method="getPrivatePerson" set-method="setPrivatePerson" usage="optional" name="PrivatePerson"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Visa" class="ru.acs.cb.schemas.sev.Visa">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <value style="element" name="SignDate" get-method="getSignDate" set-method="setSignDate" usage="optional" format="LocalDate.default"/>
+    <value style="element" name="VisaInfo" get-method="getVisaInfo" set-method="setVisaInfo" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Approval" class="ru.acs.cb.schemas.sev.Approval">
+    <structure map-as="tns:UidRequired"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <value style="element" name="SignDate" get-method="getSignDate" set-method="setSignDate" usage="optional" serializer="org.jibx.runtime.JodaConvert.serializeZonedDateTime" deserializer="org.jibx.runtime.JodaConvert.deserializeZonedDateTime"/>
+    <value style="element" name="MainInfo" get-method="getMainInfo" set-method="setMainInfo" usage="optional"/>
+    <value style="element" name="AddInfo" get-method="getAddInfo" set-method="setAddInfo" usage="optional"/>
+    <structure map-as="tns:Contact" get-method="getParentContact" set-method="setParentContact" usage="optional" name="ParentContact"/>
+    <collection get-method="getFileList" set-method="setFileList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="tns:DeloFile" name="File"/>
+    </collection>
+    <value style="attribute" name="Kind" get-method="getKind" set-method="setKind" format="tns:ApprovalKind"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Addressee" class="ru.acs.cb.schemas.sev.Addressee">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" usage="optional" name="Contact"/>
+    <structure map-as="tns:PrivatePerson" get-method="getPrivatePerson" set-method="setPrivatePerson" usage="optional" name="PrivatePerson"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Writer" class="ru.acs.cb.schemas.sev.Writer">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <value style="element" name="AddInfo" get-method="getAddInfo" set-method="setAddInfo" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:AdditionalField" class="ru.acs.cb.schemas.sev.AdditionalField">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <value style="attribute" name="Name" get-method="getName" set-method="setName"/>
+    <value style="attribute" name="Type" get-method="getType" set-method="setType" format="tns:AdditionalFieldType"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Link" class="ru.acs.cb.schemas.sev.Link">
+    <structure map-as="tns:BaseComplexType"/>
+    <structure map-as="tns:SimpleContentUidOptional" get-method="getLinkType" set-method="setLinkType" name="LinkType"/>
+    <value style="attribute" name="DocumentID" get-method="getDocumentID" set-method="setDocumentID" usage="optional"/>
+    <value style="attribute" name="Description" get-method="getDescription" set-method="setDescription" usage="optional"/>
+    <value style="attribute" name="URLString" get-method="getURLString" set-method="setURLString" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:EDMS" class="ru.acs.cb.schemas.sev.EDMS">
+    <structure map-as="tns:SimpleContentUidRequired" get-method="getSimpleContentUidRequired" set-method="setSimpleContentUidRequired"/>
+    <value style="attribute" name="Version" get-method="getVersion" set-method="setVersion" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Report" class="ru.acs.cb.schemas.sev.Report">
+    <structure map-as="tns:MessageHeader" get-method="getHeader" set-method="setHeader" name="Header"/>
+  </mapping>
+  <mapping class="ru.acs.cb.schemas.sev.Report" name="Report">
+    <structure map-as="tns:Report"/>
+  </mapping>
+</binding>
