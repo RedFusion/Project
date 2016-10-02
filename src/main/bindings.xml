@@ -1,0 +1,34 @@
+<binding xmlns:tns="http://www.eos.ru/2010/sev" name="sev" package="ru.menkin.xml.data" trim-whitespace="true">
+  <namespace uri="http://www.eos.ru/2010/sev" default="elements" prefix="tns"/>
+  <mapping abstract="true" type-name="tns:MessageHeader" class="ru.menkin.xml.data.MessageHeader">
+    <structure map-as="tns:Sender" get-method="getSender" set-method="setSender" name="Sender"/>
+    <value style="attribute" name="MessageID" get-method="getMessageID" set-method="setMessageID"/>
+    <value style="attribute" name="Version" get-method="getVersion" set-method="setVersion"/>
+    <value style="attribute" name="TimeZone" get-method="getTimeZone" set-method="setTimeZone" usage="optional"/>
+    <value style="attribute" name="Time" get-method="getTime" set-method="setTime" serializer="org.jibx.runtime.JodaConvert.serializeZonedDateTime" deserializer="org.jibx.runtime.JodaConvert.deserializeZonedDateTime"/>
+    <value style="attribute" name="ReturnID" get-method="getReturnID" set-method="setReturnID"/>
+    <value style="attribute" name="ResourceID" get-method="getResourceID" set-method="setResourceID"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Sender" class="ru.menkin.xml.data.Sender">
+    <structure map-as="tns:Contact" get-method="getContact" set-method="setContact" name="Contact"/>
+    <structure map-as="tns:EDMS" get-method="getEDMS" set-method="setEDMS" name="EDMS"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Contact" class="ru.menkin.xml.data.Contact">
+    <structure map-as="tns:Organization" get-method="getOrganization" set-method="setOrganization" name="Organization"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Organization" class="ru.menkin.xml.data.Organization">
+    <value style="attribute" name="UID" get-method="getUID" set-method="setUID"/>
+    <value style="element" name="ShortName" get-method="getShortName" set-method="setShortName"/>
+    <value style="element" name="FullName" get-method="getFullName" set-method="setFullName" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:EDMS" class="ru.menkin.xml.data.EDMS">
+    <value style="attribute" name="UID" get-method="getUID" set-method="setUID"/>
+    <value style="attribute" name="Version" get-method="getVersion" set-method="setVersion" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:Report" class="ru.menkin.xml.data.Report">
+    <structure map-as="tns:MessageHeader" get-method="getHeader" set-method="setHeader" name="Header"/>
+  </mapping>
+  <mapping class="ru.menkin.xml.data.Report" name="Report">
+    <structure map-as="tns:Report"/>
+  </mapping>
+</binding>

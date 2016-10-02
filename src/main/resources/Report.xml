@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eos.ru/2010/sev">
+	<Header MessageID="b4e3531de15042e98ea8e8bca70bcf23" Version="1.0" Time="2016-06-15T10:33:51.3628589+03:00" MessageType="Report" ReturnID="bd62243c04af48ed9743d8f092cc451f" ResourceID="0">
+		<Sender>
+			<Contact>
+				<Organization UID="ФПСО">
+					<ShortName>Общероссийский центр</ShortName>
+					<FullName>Общероссийский центр по обработке обращений Банка России</FullName>
+				</Organization>
+			</Contact>
+			<EDMS UID="BCF1A4A8CCC0A243AA56C3F62978E5AB" Version="15.7.0">Дело</EDMS>
+		</Sender>
+	</Header>
+</Report>
